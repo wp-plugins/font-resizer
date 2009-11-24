@@ -1,7 +1,7 @@
 === font-resizer ===
 Contributors: chrigu99, cubetech
 Donate link: http://www.cubetech.ch
-Tags: font, size, increase, decrease, resizer, bigger, smaller, jquery, cookie, fonts, resize, change, wordpress, cubetech, webdesign, hosting, billing
+Tags: font, size, increase, decrease, resizer, bigger, smaller, jquery, cookie, fonts, resize, change, wordpress, cubetech, webdesign, hosting, billing, widget, plugin, sidebar
 Requires at least: 2.7
 Tested up to: 2.9
 Stable tag: 1.0.0
