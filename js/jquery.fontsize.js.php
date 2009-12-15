@@ -1,6 +1,10 @@
 <?php
-if (!function_exists('get_option')) {
-    require_once("../../../../wp-config.php");
+$parent = '../';
+$tmp = '';
+while (!function_exists('get_option')) {
+    if(is_file($tmp . "wp-config.php"))
+        @require_once($tmp . "wp-config.php");
+    $tmp .= $parent;
 }
 $fontResizer = get_option('fontResizer');
 $fontResizer_element = $fontResizer;
