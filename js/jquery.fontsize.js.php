@@ -1,6 +1,10 @@
 <?php
-if (!function_exists('get_option')) {
-    require_once("../../../../wp-config.php");
+$parent = '../';
+$tmp = '';
+while (!function_exists('get_option')) {
+    if(is_file($tmp . "wp-config.php"))
+        @require_once($tmp . "wp-config.php");
+    $tmp .= $parent;
 }
 $fontResizer = get_option('fontResizer');
 $fontResizer_element = $fontResizer;
@@ -18,22 +22,22 @@ jQuery.fn.fontresizermanager = function () {
 	if(savedSize != "") {
 		jQuery('<?php echo $fontResizer_element; ?>').css("font-size", savedSize + "px");
 	}
-	jQuery('.fontresizermanager_add').css("cursor","pointer");
-	jQuery('.fontresizermanager_minus').css("cursor","pointer");
-	jQuery('.fontresizermanager_reset').css("cursor","pointer");
-	jQuery('.fontresizermanager_add').click(function() {
+	jQuery('.fontResizer_add').css("cursor","pointer");
+	jQuery('.fontResizer_minus').css("cursor","pointer");
+	jQuery('.fontResizer_reset').css("cursor","pointer");
+	jQuery('.fontResizer_add').click(function() {
 		var newFontSize = parseFloat(jQuery("<?php echo $fontResizer_element; ?>").css("font-size"))
-		newFontSize=newFontSize+1.6;
+		newFontSize=newFontSize+<?php echo get_option('fontResizer_resizeSteps'); ?>;
 		jQuery('<?php echo $fontResizer_element; ?>').css("font-size",newFontSize);
 		jQuery.cookie('fontSize', newFontSize, {expires: 31, path: '/'});
 	});
-	jQuery('.fontresizermanager_minus').click(function() {
+	jQuery('.fontResizer_minus').click(function() {
 		var newFontSize = parseFloat(jQuery("<?php echo $fontResizer_element; ?>").css("font-size"))
-		newFontSize=newFontSize-1.6;
+		newFontSize=newFontSize-<?php echo get_option('fontResizer_resizeSteps'); ?>;
 		jQuery('<?php echo $fontResizer_element; ?>').css("font-size",newFontSize);			 
 		jQuery.cookie('fontSize', newFontSize, {expires: 31, path: '/'});
 	});
-	jQuery('.fontresizermanager_reset').click(function() {
+	jQuery('.fontResizer_reset').click(function() {
 		jQuery('<?php echo $fontResizer_element; ?>').css("font-size",startFontSize);			 
 		jQuery.cookie('fontSize', startFontSize, {expires: 31, path: '/'});
 	});
