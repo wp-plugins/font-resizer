@@ -4,18 +4,25 @@
     Plugin URI: http://www.cubetech.ch/products/font-resizer
     Description: Font Resizer with jQuery and Cookies
     Author: cubetech.ch
-    Version: 1.1.0
+    Version: 1.1.3.1
     Author URI: http://www.cubetech.ch/
     */
 
+    # Add the options/actions to WordPress (if they doesn't exist)
+    
     add_action('admin_menu', 'fontResizer_addAdminPage');
     add_option('fontResizer', 'body', '', 'yes');
     add_option('fontResizer_ownid', '', '', 'yes');
     add_option('fontResizer_ownelement', '', '', 'yes');
+    add_option('fontResizer_resizeSteps', '1.6', '', 'no');
+    
+    # Register an administration page
 
     function fontResizer_addAdminPage() {
         add_options_page('font-resizer Options', 'font-resizer', 8, 'font-resizer', 'fontResizer_aMenu');
     }
+
+    # Generates the administration menu
 
     function fontResizer_aMenu() {
 	?>
@@ -45,9 +52,18 @@
 			</label><br />
 		    </td>
 		</tr>
+		<tr valig="top">
+		    <th scope="row">Resize Steps</th>
+		    <td>
+		        <label for="resizeSteps">
+		            <input type="text" name="fontResizer_resizeSteps" value="<?php echo get_option('fontResizer_resizeSteps'); ?>" style="width: 3em"><b>px</b> 
+		            <br />Set the resize steps in pixel (default: 1.6px)
+		        </label>
+		    </td>
+		</tr>
 	    </table>
 	    <input type="hidden" name="action" value="update" />
-	    <input type="hidden" name="page_options" value="fontResizer,fontResizer_ownid,fontResizer_ownelement" />
+	    <input type="hidden" name="page_options" value="fontResizer,fontResizer_ownid,fontResizer_ownelement,fontResizer_resizeSteps" />
 	    <p class="submit">
 	    	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 	    </p>
@@ -55,10 +71,12 @@
 	</div>
 	<?	
     }
+    
+    # Sort the dependencies
 
     function fontResizer_sortDependencys(){
     	$font_resizer_path = WP_PLUGIN_URL.'/font-resizer/js/';
-        wp_register_script('fontResizer', $font_resizer_path.'jquery.fontsize.js.php');
+        wp_register_script('fontResizer', $font_resizer_path.'jquery.fontsize.js');
         wp_register_script('fontResizerCookie', $font_resizer_path.'jquery.cookie.js');
         wp_register_script('fontResizerPlugin', $font_resizer_path.'main.js');
         wp_enqueue_script('jquery');
@@ -66,16 +84,22 @@
         wp_enqueue_script('fontResizer');
         wp_enqueue_script('fontResizerPlugin');
     }
+    
+    # Generate the font-resizer text
 
-    function fontResizer_place($style = 'smooth'){
-		$font_resizer_path = WP_PLUGIN_URL.'/font-resizer/img/';
-		echo '<li class="fontmanager" style="text-align: center; font-weight: bold;">';
-		echo '<a class="fontresizermanager_minus" title="Decrease font size" style="font-size: 0.7em;">A</a> ';
-		echo '<a class="fontresizermanager_reset" title="Reset font size">A</a> ';
-		echo '<a class="fontresizermanager_add" title="Increase font size" style="font-size: 1.2em;">A</a> ';
+    function fontResizer_place(){
+		echo '<li class="fontResizer" style="text-align: center; font-weight: bold;">';
+		echo '<a class="fontResizer_minus" title="Decrease font size" style="font-size: 0.7em;">A</a> ';
+		echo '<a class="fontResizer_reset" title="Reset font size">A</a> ';
+		echo '<a class="fontResizer_add" title="Increase font size" style="font-size: 1.2em;">A</a> ';
+		echo '<input type="hidden" id="fontResizer_value" value="'.get_option('fontResizer').'" />';
+		echo '<input type="hidden" id="fontResizer_ownid" value="'.get_option('fontResizer_ownid').'" />';
+		echo '<input type="hidden" id="fontResizer_ownelement" value="'.get_option('fontResizer_ownelement').'" />';
+		echo '<input type="hidden" id="fontResizer_resizeSteps" value="'.get_option('fontResizer_resizeSteps').'" />';
 		echo '</li>';
     }
 	
+	# Creating the widget
 
     function fontresizer_widget($args) {
         extract($args);
@@ -84,14 +108,21 @@
 
     add_action('init', 'fontResizer_sortDependencys');
 	
+	# Register sidebar function
+	
     register_sidebar_widget('Font Resizer','fontresizer_widget');
 
+    # Register uninstall function
+
     register_uninstall_hook(__FILE__, 'fontResizer_uninstaller');
+    
+    # This function deletes the options when you uninstall the plugin
 
     function fontResizer_uninstaller() {
     	delete_option('fontResizer');
     	delete_option('fontResizer_ownid');
     	delete_option('fontResizer_ownelement');
+    	delete_option('fontResizer_resizeSteps');
     }
 
 ?>

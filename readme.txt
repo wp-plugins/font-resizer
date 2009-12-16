@@ -4,7 +4,7 @@ Donate link: http://www.cubetech.ch
 Tags: font, size, increase, decrease, resizer, bigger, smaller, jquery, cookie, fonts, resize, change, wordpress, cubetech, webdesign, hosting, billing, widget, plugin, sidebar
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.1.0
+Stable tag: 1.1.3
 
 font-resizer allows the visitors of your blog to change the content font size
 
@@ -32,10 +32,31 @@ Which content is going resized, you can set on the admin page called "font-resiz
 = How can i activate the function of the plugin? =
 Go to the admin page of the plugin and select your option. If you are not familiar with html and css, select the body option (default). This would resize each content of your page.
 
+= How can i use the plugin without the widget? =
+Use this snippet of PHP code (in your theme or somewhere): <?php if(function_exists('fontResizer_place')) { fontResizer_place(); } ?>
+
 = Are there more FAQ? =
 Not yet, no. But feel free to contact us if you have a question! info@cubetech.ch
 
 == Changelog ==
+
+= 1.1.3.1 =
+
+* Added an answer to FAQ
+
+= 1.1.3 =
+
+* Fixed JavaScript issue with qTranslate
+* Refactured jQuery scripts
+
+= 1.1.2 =
+* Added an option for changing the font resize steps
+* Added comments to source code
+* Cleaned up source code
+* Changed css classes of the visible resizer element in the sidebar
+
+= 1.1.1 =
+* Bugfix for different directory structure (like language structure, yourdomain.tld/en/ for english)
 
 = 1.1.0 =
 * Added menu page
