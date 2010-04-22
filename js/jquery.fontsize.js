@@ -14,7 +14,7 @@ jQuery.fn.fontresizermanager = function () {
 	}
 	var startFontSize = parseFloat(jQuery(fontResizer_element+"").css("font-size"));
 	var savedSize = jQuery.cookie('fontSize');
-	if(savedSize != "") {
+	if(savedSize > 4) {
 		jQuery(fontResizer_element).css("font-size", savedSize + "px");
 	}
 	jQuery('.fontResizer_add').css("cursor","pointer");

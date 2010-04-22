@@ -4,7 +4,7 @@ Donate link: http://www.cubetech.ch
 Tags: font, size, increase, decrease, resizer, bigger, smaller, jquery, cookie, fonts, resize, change, wordpress, cubetech, webdesign, hosting, billing, widget, plugin, sidebar
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 
 font-resizer allows the visitors of your blog to change the content font size
 
@@ -40,6 +40,10 @@ Use this snippet of PHP code (in your theme or somewhere): &lt;?php if(function_
 Not yet, no. But feel free to contact us if you have a question! info@cubetech.ch
 
 == Changelog ==
+
+= 1.1.5 =
+
+* Fixed problem with Internet Explorer
 
 = 1.1.4 =
 
