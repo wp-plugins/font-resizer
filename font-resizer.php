@@ -79,7 +79,7 @@
 	    </p>
 	    </form>
 	</div>
-	<?	
+	<?php	
     }
     
     # Sort the dependencies
