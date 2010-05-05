@@ -8,7 +8,7 @@ jQuery.fn.fontresizermanager = function () {
 	if(fontResizer_value == "innerbody") {
 		fontResizer_element = "div#innerbody";
 	} else if(fontResizer_value == "ownid") {
-		fontResizer_element = "div" + fontResizer_ownid;
+		fontResizer_element = "div#" + fontResizer_ownid;
 	} else if(fontResizer_value == "ownelement") {
 		fontResizer_element = fontResizer_ownelement;
 	}
