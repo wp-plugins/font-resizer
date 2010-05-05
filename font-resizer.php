@@ -4,7 +4,7 @@
     Plugin URI: http://www.cubetech.ch/products/font-resizer
     Description: Font Resizer with jQuery and Cookies
     Author: cubetech.ch
-    Version: 1.1.4
+    Version: 1.1.6
     Author URI: http://www.cubetech.ch/
     */
 
